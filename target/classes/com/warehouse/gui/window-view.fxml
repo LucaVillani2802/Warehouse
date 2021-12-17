@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+   <TabPane pickOnBounds="false" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.warehouse.gui.WindowController">
+     <tabs>
+       <Tab text="Entry Orders">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="500.0">
+                  <children>
+                     <VBox prefHeight="500.0" prefWidth="500.0">
+                        <children>
+                           <Separator orientation="VERTICAL" prefHeight="5.0" />
+                           <VBox prefHeight="50.0" prefWidth="500.0">
+                              <children>
+                                 <Label alignment="CENTER" prefHeight="17.0" prefWidth="503.0" text="Fill the field below to add new order" textAlignment="CENTER">
+                                    <font>
+                                       <Font size="16.0" />
+                                    </font>
+                                 </Label>
+                                 <HBox prefHeight="50.0" prefWidth="200.0">
+                                    <children>
+                                       <Separator prefWidth="5.0" />
+                                       <Label prefHeight="25.0" prefWidth="37.0" text="Name" />
+                                       <TextField fx:id="nameTextField" />
+                                       <Separator prefWidth="20.0" />
+                                       <Label prefHeight="25.0" prefWidth="54.0" text="Surname" />
+                                       <TextField fx:id="surnameTextField" />
+                                    </children>
+                                 </HBox>
+                              </children>
+                           </VBox>
+                           <Separator orientation="VERTICAL" prefHeight="15.0" />
+                           <HBox prefHeight="30.0" prefWidth="200.0">
+                              <children>
+                                 <Separator prefWidth="5.0" />
+                                 <Label prefHeight="25.0" prefWidth="68.0" text="Item Name" />
+                                 <ComboBox fx:id="itemComboBox" prefWidth="150.0" />
+                                 <Separator prefHeight="0.0" prefWidth="20.0" />
+                                 <Label prefHeight="25.0" prefWidth="60.0" text="Quantity" />
+                                 <Spinner fx:id="quantitySpinner" />
+                                 <Separator prefWidth="5.0" />
+                              </children>
+                           </HBox>
+                           <Separator orientation="VERTICAL" prefHeight="15.0" />
+                           <HBox prefHeight="30.0" prefWidth="200.0">
+                              <children>
+                                 <Separator prefWidth="5.0" />
+                                 <Label prefHeight="25.0" prefWidth="155.0" text="Metodo di Pagamemento" />
+                                 <ChoiceBox fx:id="paymentChoiceBox" prefWidth="150.0" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+         </content>
+       </Tab>
+       <Tab text="Creating New Item">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" />
+         </content>
+       </Tab>
+        <Tab text="Orders List">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" />
+            </content>
+        </Tab>
+     </tabs>
+   </TabPane>
