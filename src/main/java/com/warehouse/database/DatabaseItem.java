@@ -6,6 +6,7 @@ public class DatabaseItem extends Item {
     public Double totalCost;
     public String personName;
     public String personSurname;
+    public Integer orderedQuantity;
 
 
     public DatabaseItem(String personName, String personSurname, String productName, Integer quantity, Double price, String paymentMethod) {
@@ -14,6 +15,7 @@ public class DatabaseItem extends Item {
         this.productName = productName;
         this.totalCost = price * quantity;
         this.paymentMethod = paymentMethod;
+        this.orderedQuantity = quantity;
     }
 
     public String getPersonSurname() {
@@ -25,6 +27,11 @@ public class DatabaseItem extends Item {
     }
     public Double getTotalCost() {
         return totalCost;
+    }
+
+    @Override
+    public Integer getQuantity(){
+        return this.orderedQuantity;
     }
 
 }

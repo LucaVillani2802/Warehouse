@@ -12,7 +12,7 @@ public interface ItemInterface {
     public String getDescription();
     public String getPaymentMethod();
     public Double getPrice();
-    public int getQuantity();
+    public Integer getQuantity();
 
 
 }

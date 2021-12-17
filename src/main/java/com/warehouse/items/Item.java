@@ -57,7 +57,7 @@ public abstract class Item implements ItemInterface {
     }
 
     @Override
-    public int getQuantity() {
+    public Integer getQuantity() {
         return avaiableQuantity;
     }
 }
