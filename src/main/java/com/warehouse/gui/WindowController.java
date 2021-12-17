@@ -39,7 +39,7 @@ public class WindowController {
         itemComboBox.setPromptText("Choose the item");
 
         // configure the spinner for the values 0 to 100, QUANTITY Spinner
-        SpinnerValueFactory<Integer> quantityValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100, 0);
+        SpinnerValueFactory<Integer> quantityValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
         this.quantitySpinner.setValueFactory(quantityValueFactory);
 
     }
