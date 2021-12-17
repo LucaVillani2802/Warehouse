@@ -1,5 +1,6 @@
 package com.warehouse.gui;
 
+import com.warehouse.database.DatabaseItem;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -48,13 +49,8 @@ public class WindowController {
     }
 
     public void on_button_clicked(){
-        String name = nameTextField.getText();
-        String surname = surnameTextField.getText();
-        String itemName = (String) itemComboBox.getValue();
-        Integer quantity = (Integer) quantitySpinner.getValue();
-        String paymentMethod = (String) paymentChoiceBox.getValue();
-
-        insertIntoDB(name, surname, itemName, quantity, paymentMethod);
+        DatabaseItem databaseItem = new DatabaseItem(nameTextField.getText(), surnameTextField.getText(), (String) itemComboBox.getValue(), (Integer) quantitySpinner.getValue(),0.0,(String) paymentChoiceBox.getValue());
+        insertIntoDB(databaseItem);
     }
 
 }

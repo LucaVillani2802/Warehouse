@@ -1,5 +1,7 @@
 package com.warehouse.database;
 
+import com.warehouse.items.EditableItem;
+
 import java.sql.*;
 public class DatabaseManager {
     private static Connection connection;
@@ -46,20 +48,20 @@ public class DatabaseManager {
         }
     }
 
-
-    public static void insertIntoDB(String name, String surname, String productName, Integer quantity, String paymentMethod){
+E
+    public static void insertIntoDB(DatabaseItem databaseItem){
 
         String sql = "INSERT INTO OrderList(name, surname, prdname, payment_method, price, quantity) VALUES(?,?,?,?,?,?)";
 
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1, name);
-            pstmt.setString(2, surname);
-            pstmt.setString(3,productName);
-            pstmt.setString(4,paymentMethod);
-            pstmt.setDouble(5, 0);
-            pstmt.setInt(6,quantity);
+            pstmt.setString(1, databaseItem.getPersonName());
+            pstmt.setString(2, databaseItem.getPersonSurname());
+            pstmt.setString(3,databaseItem.getProductName());
+            pstmt.setString(4,databaseItem.getPaymentMethod());
+            pstmt.setDouble(5, databaseItem.getTotalCost());
+            pstmt.setInt(6,databaseItem.getQuantity());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

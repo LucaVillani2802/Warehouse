@@ -11,8 +11,8 @@ public interface ItemInterface {
     public String getProductName();
     public String getDescription();
     public String getPaymentMethod();
-    public void getPrice();
-    public void getQuantity();
+    public Double getPrice();
+    public int getQuantity();
 
 
 }

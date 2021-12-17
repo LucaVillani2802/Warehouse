@@ -7,7 +7,8 @@ public class DatabaseItem extends Item {
     public String personName;
     public String personSurname;
 
-    public DatabaseItem(String personName, String personSurname,String productName, Double price, Integer quantity, String paymentMethod) {
+
+    public DatabaseItem(String personName, String personSurname, String productName, Integer quantity, Double price, String paymentMethod) {
         this.personName = personName;
         this.personSurname = personSurname;
         this.productName = productName;
@@ -15,6 +16,13 @@ public class DatabaseItem extends Item {
         this.paymentMethod = paymentMethod;
     }
 
+    public String getPersonSurname() {
+        return personSurname;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
     public Double getTotalCost() {
         return totalCost;
     }

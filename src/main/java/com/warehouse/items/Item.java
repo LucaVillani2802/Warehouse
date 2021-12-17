@@ -6,12 +6,10 @@ public abstract class Item implements ItemInterface {
     protected String productName;
     protected String description;
     protected Double price;
-    protected Integer quantity;
+    protected Integer avaiableQuantity;
 
     public Item() {
-
     }
-
 
     @Override
     public void setDescription(String description) {
@@ -20,10 +18,12 @@ public abstract class Item implements ItemInterface {
 
     @Override
     public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override
     public void setQuantity(Integer quantity) {
+        this.avaiableQuantity = quantity;
     }
 
     @Override
@@ -51,12 +51,13 @@ public abstract class Item implements ItemInterface {
         return paymentMethod;
     }
 
-
     @Override
-    public void getPrice() {
+    public Double getPrice() {
+        return price;
     }
 
     @Override
-    public void getQuantity() {
+    public int getQuantity() {
+        return avaiableQuantity;
     }
 }
