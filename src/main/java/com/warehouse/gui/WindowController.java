@@ -7,9 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.*;
+import com.warehouse.database.DatabaseManager;
 
+import static com.warehouse.database.DatabaseManager.insertIntoDB;
 
 public class WindowController {
+    @FXML
+    protected Button saveOrderButton;
 
     @FXML
     protected TextField nameTextField;
@@ -27,7 +31,6 @@ public class WindowController {
     protected ChoiceBox paymentChoiceBox;
 
     public void initialize(){
-
         // this configures the PAYMENT ChoiceBox
         paymentChoiceBox.getItems().setAll("Cash Payment","Electronic Payment");
         paymentChoiceBox.selectionModelProperty();
@@ -44,6 +47,14 @@ public class WindowController {
 
     }
 
+    public void on_button_clicked(){
+        String name = nameTextField.getText();
+        String surname = surnameTextField.getText();
+        String itemName = (String) itemComboBox.getValue();
+        Integer quantity = (Integer) quantitySpinner.getValue();
+        String paymentMethod = (String) paymentChoiceBox.getValue();
 
+        insertIntoDB(name, surname, itemName, quantity, paymentMethod);
+    }
 
 }

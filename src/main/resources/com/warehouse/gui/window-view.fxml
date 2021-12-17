@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-   <TabPane pickOnBounds="false" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.warehouse.gui.WindowController">
+<TabPane pickOnBounds="false" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.warehouse.gui.WindowController">
      <tabs>
        <Tab text="Entry Orders">
          <content>
@@ -50,6 +50,8 @@
                                  <Separator prefWidth="5.0" />
                                  <Label prefHeight="25.0" prefWidth="155.0" text="Metodo di Pagamemento" />
                                  <ChoiceBox fx:id="paymentChoiceBox" prefWidth="150.0" />
+                              <Separator prefWidth="30.0" />
+                              <Button fx:id="saveOrderButton" mnemonicParsing="false" onAction="#on_button_clicked" prefHeight="30.0" prefWidth="100.0" text="Save Order" />
                               </children>
                            </HBox>
                         </children>

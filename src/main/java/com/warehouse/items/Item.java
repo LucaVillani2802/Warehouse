@@ -1,51 +1,62 @@
 package com.warehouse.items;
 
-public class Item {
+public abstract class Item implements ItemInterface {
 
-    private String productName;
-    private String description;
-    private Double price;
-    private Integer quantity;
+    protected String paymentMethod;
+    protected String productName;
+    protected String description;
+    protected Double price;
+    protected Integer quantity;
 
-    public Item(String productName, String description, Double price, Integer quantity ) {
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
+    public Item() {
+
     }
 
-    public String getProductName() {
-        return productName;
-    }
 
-    public void setName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
+    @Override
     public void setPrice(Double price) {
-        this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
+    @Override
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    }
+
+    @Override
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    @Override
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    @Override
+    public String getProductName() {
+        return this.productName;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
 
+    @Override
+    public void getPrice() {
+    }
 
+    @Override
+    public void getQuantity() {
+    }
 }
