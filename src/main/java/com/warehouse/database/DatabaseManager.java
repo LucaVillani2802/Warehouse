@@ -47,8 +47,6 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
-
-E
     public static void insertIntoDB(DatabaseItem databaseItem){
 
         String sql = "INSERT INTO OrderList(name, surname, prdname, payment_method, price, quantity) VALUES(?,?,?,?,?,?)";
