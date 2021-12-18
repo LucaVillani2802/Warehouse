@@ -67,6 +67,42 @@
                   <VBox prefHeight="500.0" prefWidth="500.0">
                      <children>
                         <Separator orientation="VERTICAL" prefHeight="5.0" />
+                        <HBox prefHeight="30.0" prefWidth="500.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Item Name" />
+                              <TextField />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="5.0" />
+                        <HBox prefHeight="70.0" prefWidth="500.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Description" />
+                              <TextArea prefHeight="70.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="5.0" />
+                        <HBox prefHeight="63.0" prefWidth="500.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Quantity Avaiable" />
+                              <Spinner prefHeight="25.0" prefWidth="60.0" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="5.0" />
+                        <HBox prefHeight="30.0" prefWidth="500.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Price" />
+                              <TextField />
+                              <Label prefHeight="25.0" prefWidth="20.0" text="€" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="5.0" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Separator prefWidth="175.0" />
+                              <Button mnemonicParsing="false" prefWidth="150.0" text="Save Item" />
+                              <Separator prefWidth="175.0" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children></AnchorPane>
