@@ -13,7 +13,7 @@ public class DatabaseItem extends Item {
         this.personName = personName;
         this.personSurname = personSurname;
         this.productName = productName;
-        this.totalCost = price * quantity;
+        this.totalCost = price;
         this.paymentMethod = paymentMethod;
         this.orderedQuantity = quantity;
     }

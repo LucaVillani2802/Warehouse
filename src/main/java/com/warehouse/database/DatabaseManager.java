@@ -1,11 +1,13 @@
 package com.warehouse.database;
 
 import com.warehouse.items.EditableItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 public class DatabaseManager {
     private static Connection connection;
-    private String url;
+    public static String url = "jdbc:sqlite:OrderList.db";
 
     public DatabaseManager() throws ClassNotFoundException {
 
@@ -26,10 +28,8 @@ public class DatabaseManager {
 
     public void createOrderListTable(){
 
-        this.url = "jdbc:sqlite:E://CodingProjects/JavaProjects/Warehouse/OrderList.db";
-
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS OrderList (\n"
+        String sql = "CREATE TABLE IF NOT EXISTS OrderTable (\n"
                 + "	id integer PRIMARY KEY,\n"
                 + "	name text NOT NULL,\n"
                 + " surname text,\n"
@@ -47,9 +47,29 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public void createItemsTable(){
+
+        String sql = "CREATE TABLE IF NOT EXISTS ItemsTable(\n"
+                    + "id integer PRIMARY KEY, \n"
+                    + "item_name text not null, \n"
+                    + "description text, \n"
+                    + "quantity_avaiable integer not null, \n"
+                    + "price real not null"
+                    + ");";
+        try(Connection connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement()){
+            statement.execute(sql);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
     public static void insertIntoDB(DatabaseItem databaseItem){
 
-        String sql = "INSERT INTO OrderList(name, surname, prdname, payment_method, price, quantity) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO OrderTable(name, surname, prdname, payment_method, price, quantity) VALUES(?,?,?,?,?,?)";
 
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -66,5 +86,45 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+    public static void insertIntoItemTable( EditableItem editableItem ){
 
+        String sql = "INSERT INTO ItemsTable (item_name, description, quantity_avaiable, price) VALUES(?,?,?,?)";
+        try ( PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1, editableItem.getProductName());
+            pstmt.setString(2, editableItem.getDescription());
+            pstmt.setInt(3,editableItem.getQuantity());
+            pstmt.setDouble(4, editableItem.getPrice());
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static ObservableList<DatabasePropertyItem> showOrders(){
+        String sql = "SELECT * FROM OrderTable";
+        ObservableList<DatabasePropertyItem> data = FXCollections.observableArrayList();
+
+        try(Connection connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement()) {
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                data.add(new DatabasePropertyItem(  rs.getString("name"),
+                                            rs.getString("surname"),
+                                            rs.getString("prdname"),
+                                            rs.getInt("quantity"),
+                                            rs.getDouble("price"),
+                                            rs.getString("payment_method")));
+
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return data;
+    }
 }

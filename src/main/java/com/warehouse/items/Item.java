@@ -6,7 +6,7 @@ public abstract class Item implements ItemInterface {
     protected String productName;
     protected String description;
     protected Double price;
-    protected Integer avaiableQuantity;
+    protected Integer quantity;
 
     public Item() {
     }
@@ -23,7 +23,7 @@ public abstract class Item implements ItemInterface {
 
     @Override
     public void setQuantity(Integer quantity) {
-        this.avaiableQuantity = quantity;
+        this.quantity = quantity;
     }
 
     @Override
@@ -58,6 +58,6 @@ public abstract class Item implements ItemInterface {
 
     @Override
     public Integer getQuantity() {
-        return avaiableQuantity;
+        return quantity;
     }
 }
