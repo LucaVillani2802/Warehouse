@@ -3,16 +3,17 @@ package com.warehouse.gui;
 import com.warehouse.database.DatabaseItem;
 import com.warehouse.database.DatabasePropertyItem;
 import com.warehouse.items.EditableItem;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.warehouse.database.DatabaseManager;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import static com.warehouse.database.DatabaseManager.insertIntoDB;
-import static com.warehouse.database.DatabaseManager.insertIntoItemTable;
+import static com.warehouse.database.DatabaseManager.*;
 
 public class WindowController {
+
     @FXML
     protected Button saveOrderButton;
 
@@ -47,7 +48,7 @@ public class WindowController {
     protected Spinner itemQuantitySpinner;
 
     @FXML
-    protected TableView<DatabasePropertyItem> orderListTable;
+    protected TableView orderListTable;
 
     @FXML
     protected TableColumn<DatabasePropertyItem, Integer> idTableColumn;
@@ -88,9 +89,6 @@ public class WindowController {
 
         this.itemQuantitySpinner.setValueFactory(quantityValueFactory);
 
-        initTable();
-        configureOrderTable();
-
     }
 
     public void on_button_clicked(){
@@ -101,7 +99,6 @@ public class WindowController {
                 (EditableItem.findPrice((String) itemComboBox.getValue()))*(Integer)quantitySpinner.getValue(),
                                                     (String) paymentChoiceBox.getValue());
         insertIntoDB(databaseItem);
-        configureOrderTable();
     }
 
     public void on_saveitembutton_clicked() {
@@ -119,21 +116,7 @@ public class WindowController {
 
     }
 
-    public void initTable(){
-        idTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        surnameTableColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        prdnameTableColumn.setCellValueFactory(new PropertyValueFactory<>("prdname"));
-        priceTableColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        quantityTableColumn.setCellValueFactory((new PropertyValueFactory<>("quantity")));
-        orderListTable.getColumns().addAll(idTableColumn,nameTableColumn,surnameTableColumn,prdnameTableColumn, payment_methodTableColumn,priceTableColumn,quantityTableColumn);
-    }
 
-    public void configureOrderTable(){
-
-        ObservableList<DatabasePropertyItem> data = DatabaseManager.showOrders();
-        orderListTable.setItems(data);
-    }
-
+    //TODO showing database and refresh when a new order is added
 
 }

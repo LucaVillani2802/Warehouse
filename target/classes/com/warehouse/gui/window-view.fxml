@@ -112,13 +112,13 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                <children>
-                  <TableView fx:id="orderListTable" prefHeight="502.0" prefWidth="500.0">
+                  <TableView fx:id="orderListTable" prefHeight="500.0" prefWidth="600.0">
                     <columns>
                       <TableColumn fx:id="idTableColumn" prefWidth="75.0" text="id" />
                       <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="name" />
                         <TableColumn fx:id="surnameTableColumn" prefWidth="75.0" text="surname" />
-                        <TableColumn fx:id="prdnameTableColumn" prefWidth="75.0" text="prdname" />
-                        <TableColumn fx:id="payment_methodTableColumn" prefWidth="75.0" text="payment_method" />
+                        <TableColumn fx:id="prdnameTableColumn" text="prdname" />
+                        <TableColumn fx:id="payment_methodTableColumn" prefWidth="140.0" text="payment_method" />
                         <TableColumn fx:id="priceTableColumn" prefWidth="75.0" text="price" />
                         <TableColumn fx:id="quantityTableColumn" prefWidth="75.0" text="quantity" />
                     </columns>

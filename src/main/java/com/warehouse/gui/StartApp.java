@@ -21,7 +21,7 @@ public class StartApp extends Application {
         databaseManager.createOrderListTable();
         databaseManager.createItemsTable();
         FXMLLoader fxmlLoader = new FXMLLoader(StartApp.class.getResource("window-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), screenWidth/3.5, screenHeight/2);
+        Scene scene = new Scene(fxmlLoader.load(), 600  , 500);
         stage.setTitle("Warehouse Manager");
         stage.setScene(scene);
         stage.show();
