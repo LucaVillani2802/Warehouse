@@ -102,9 +102,9 @@ public class DatabaseManager {
         }
     }
 
-    public static ObservableList<DatabasePropertyItem> showOrders(){
+    public static ObservableList<DatabaseItem> showOrders(){
         String sql = "SELECT * FROM OrderTable";
-        ObservableList<DatabasePropertyItem> data = FXCollections.observableArrayList();
+        ObservableList<DatabaseItem> data = FXCollections.observableArrayList();
 
         try(Connection connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement()) {
@@ -113,7 +113,8 @@ public class DatabaseManager {
 
             while(rs.next()){
 
-                data.add(new DatabasePropertyItem(  rs.getString("name"),
+                data.add(new DatabaseItem(  rs.getInt("id"),
+                                            rs.getString("name"),
                                             rs.getString("surname"),
                                             rs.getString("prdname"),
                                             rs.getInt("quantity"),
@@ -121,7 +122,6 @@ public class DatabaseManager {
                                             rs.getString("payment_method")));
 
             }
-            rs.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

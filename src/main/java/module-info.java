@@ -10,4 +10,6 @@ module com.warehouse.warehouse {
 
     opens com.warehouse.gui to javafx.fxml;
     exports com.warehouse.gui;
+    exports com.warehouse.database;
+    opens com.warehouse.database to javafx.fxml;
 }
