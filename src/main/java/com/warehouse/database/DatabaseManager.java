@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+
 public class DatabaseManager {
     private static Connection connection;
     public static String url = "jdbc:sqlite:OrderList.db";
@@ -17,7 +18,7 @@ public class DatabaseManager {
 
         try {
             // create a database connection
-            this.connection = DriverManager.getConnection("jdbc:sqlite:OrderList.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:OrderList.db");
             DatabaseMetaData meta = connection.getMetaData();
             System.out.println(meta);
 
@@ -29,15 +30,16 @@ public class DatabaseManager {
     public void createOrderListTable(){
 
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS OrderTable (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	name text NOT NULL,\n"
-                + " surname text,\n"
-                + " prdname text,\n"
-                + " payment_method text,\n"
-                + " price real,\n"
-                + "	quantity integer\n"
-                + ");";
+        String sql = """
+                CREATE TABLE IF NOT EXISTS OrderTable (
+                	id integer PRIMARY KEY,
+                	name text NOT NULL,
+                 surname text,
+                 prdname text,
+                 payment_method text,
+                 price real,
+                	quantity integer
+                );""";
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
@@ -48,16 +50,15 @@ public class DatabaseManager {
         }
     }
 
-
     public void createItemsTable(){
 
-        String sql = "CREATE TABLE IF NOT EXISTS ItemsTable(\n"
-                    + "id integer PRIMARY KEY, \n"
-                    + "item_name text not null, \n"
-                    + "description text, \n"
-                    + "quantity_avaiable integer not null, \n"
-                    + "price real not null"
-                    + ");";
+        String sql = """
+                CREATE TABLE IF NOT EXISTS ItemsTable(
+                id integer PRIMARY KEY,\s
+                item_name text not null,\s
+                description text,\s
+                quantity_avaiable integer not null,\s
+                price real not null);""";
         try(Connection connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement()){
             statement.execute(sql);
@@ -67,6 +68,7 @@ public class DatabaseManager {
         }
 
     }
+
     public static void insertIntoDB(DatabaseItem databaseItem){
 
         String sql = "INSERT INTO OrderTable(name, surname, prdname, payment_method, price, quantity) VALUES(?,?,?,?,?,?)";
@@ -86,6 +88,7 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
     }
+
     public static void insertIntoItemTable( EditableItem editableItem ){
 
         String sql = "INSERT INTO ItemsTable (item_name, description, quantity_avaiable, price) VALUES(?,?,?,?)";
@@ -126,5 +129,57 @@ public class DatabaseManager {
             throwables.printStackTrace();
         }
         return data;
+    }
+
+    public static void modifyQuantityItem(DatabaseItem databaseItem){
+
+        String sql = "SELECT quantity_avaiable FROM ItemsTable WHERE item_name = ?";
+
+        Integer data = databaseItem.getQuantity();
+
+        try(Connection con = DriverManager.getConnection(url);
+            PreparedStatement statement = con.prepareStatement(sql))
+        {
+            statement.setString(1, databaseItem.getProductName());
+            ResultSet rs = statement.executeQuery();
+
+            while ( rs.next())
+            {
+                data = rs.getInt("quantity_avaiable") - databaseItem.getQuantity();
+            }
+
+            sql = "UPDATE ItemsTable SET quantity_avaiable = ? WHERE item_name = ?";
+            PreparedStatement statement1 = con.prepareStatement(sql);
+
+            statement1.setInt(1,data);
+            statement1.setString(2,databaseItem.getProductName());
+            statement1.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public static  ObservableList<EditableItem> showItems(){
+        String sql = "SELECT * FROM ItemsTable";
+        ObservableList<EditableItem> data = FXCollections.observableArrayList();
+
+        try(Connection connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement()) {
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()){
+
+                data.add(new EditableItem(  rs.getInt("id"), rs.getString("item_name"), rs.getString("description"),
+                        rs.getInt("quantity_avaiable"), rs.getDouble("price")));
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return data;
+
     }
 }

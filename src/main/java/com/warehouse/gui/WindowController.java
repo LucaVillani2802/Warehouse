@@ -47,6 +47,8 @@ public class WindowController {
     @FXML
     protected Spinner<Integer> itemQuantitySpinner;
 
+    //-----TABLE VIEW ORDERS LIST-----
+
     @FXML
     protected TableView<DatabaseItem> orderListTable;
 
@@ -64,12 +66,32 @@ public class WindowController {
 
     @FXML
     protected TableColumn<DatabaseItem, String> payment_methodTableColumn;
+
     @FXML
     protected TableColumn<DatabaseItem, String> priceTableColumn;
 
     @FXML
     protected TableColumn<DatabaseItem, String> quantityTableColumn;
 
+    //-----TABLE VIEW ITEMS LIST-----
+
+    @FXML
+    protected TableView<EditableItem> itemsTableList;
+
+    @FXML
+    protected TableColumn<EditableItem, String> idItemTableColumn;
+
+    @FXML
+    protected TableColumn<EditableItem, String> itemNameTableColumn;
+
+    @FXML
+    protected TableColumn<EditableItem, String> descriptionTableColumn;
+
+    @FXML
+    protected TableColumn<EditableItem, String> quantityItemTableColumn;
+
+    @FXML
+    protected TableColumn<EditableItem, String> priceItemTableColumnl;
 
     public void initialize(){
         // this configures the PAYMENT ChoiceBox
@@ -78,10 +100,6 @@ public class WindowController {
 
         // this item configures the ITEM ComboBox
         configureComboBox();
-        itemComboBox.getItems().addAll(EditableItem.findnames());
-        itemComboBox.setVisibleRowCount(3);
-        itemComboBox.setEditable(true);
-        itemComboBox.setPromptText("Choose the item");
 
         // configure the spinner for the values 0 to 100, QUANTITY Spinner
         SpinnerValueFactory<Integer> quantityValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
@@ -90,6 +108,7 @@ public class WindowController {
         this.itemQuantitySpinner.setValueFactory(quantityValueFactory);
 
         initTableView();
+        initItemTableView();
     }
 
     public void on_button_clicked(){
@@ -101,14 +120,20 @@ public class WindowController {
                 (EditableItem.findPrice(itemComboBox.getValue()))* quantitySpinner.getValue(),
                 paymentChoiceBox.getValue()
         );
+        //TODO creating controls where if the quantity_avaiable is less than the quantity ordered a dialog window is showed
+
         insertIntoDB(databaseItem);
         orderListTable.setItems(showOrders());
+        modifyQuantityItem(databaseItem);
+        modifyItemView();
+
     }
 
     public void on_saveitembutton_clicked() {
         EditableItem editableItem = new EditableItem(itemNameTextField.getText(), itemDescriptionTextArea.toString(), itemQuantitySpinner.getValue(), Double.parseDouble(itemPriceTextField.getText()));
         insertIntoItemTable(editableItem);
         configureComboBox();
+        modifyItemView();
     }
 
     public void configureComboBox(){
@@ -120,8 +145,7 @@ public class WindowController {
 
     }
 
-    public void initTableView()
-    {
+    public void initTableView(){
         idTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOrderId().toString()));
         nameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPersonName()));
         surnameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPersonSurname()));
@@ -133,7 +157,18 @@ public class WindowController {
         orderListTable.setItems(showOrders());
     }
 
+    public void initItemTableView(){
+        idItemTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getId().toString()));
+        itemNameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProductName()));
+        descriptionTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
+        quantityItemTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getQuantity().toString()));
+        priceItemTableColumnl.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrice().toString()));
 
-    //TODO showing database and refresh when a new order is added
+        modifyItemView();
+    }
+
+    public void modifyItemView(){
+        itemsTableList.setItems(showItems());
+    }
 
 }

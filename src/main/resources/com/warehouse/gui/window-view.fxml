@@ -126,5 +126,22 @@
                </children></AnchorPane>
             </content>
         </Tab>
+         <Tab text="Items Avaiable">
+            <content>
+                <AnchorPane>
+                    <children>
+                        <TableView fx:id="itemsTableList" prefHeight="500.0" prefWidth="600.0">
+                            <columns>
+                                <TableColumn fx:id="idItemTableColumn" prefWidth="75" text="id" />
+                                <TableColumn fx:id="itemNameTableColumn" prefWidth="166.0" text="item_name" />
+                                <TableColumn fx:id="descriptionTableColumn" prefWidth="209.0" text="description" />
+                                <TableColumn fx:id="quantityItemTableColumn" prefWidth="75" text="quantity_avaiable" />
+                                <TableColumn fx:id="priceItemTableColumnl" prefWidth="75" text="price" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+         </Tab>
      </tabs>
    </TabPane>

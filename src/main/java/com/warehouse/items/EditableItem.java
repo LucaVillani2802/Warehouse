@@ -10,15 +10,26 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class EditableItem extends Item{
-    public EditableItem(String productName, String description, Integer quantity, Double price){
+    Integer id;
+    public EditableItem(Integer id, String productName, String description, Integer quantity, Double price){
         this.productName = productName;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.id = id;
     }
 
-    public static double findPrice(String itemname)
-    {
+    public EditableItem(String text, String descr, Integer value, double parseDouble) {
+        this.productName = text;
+        this.description = descr;
+        this.quantity = value;
+        this.price = parseDouble;
+    }
+
+    public Integer getId(){
+        return this.id;
+    }
+    public static double findPrice(String itemname){
         String sql = "SELECT price FROM ItemsTable WHERE item_name = ?";
 
         try(Connection connection = DriverManager.getConnection(DatabaseManager.url);
