@@ -182,4 +182,34 @@ public class DatabaseManager {
         return data;
 
     }
+
+    public  static void refillInItemsTable(String productName, Integer quantity)
+    {
+        String sql = "SELECT quantity_avaiable FROM ItemsTable WHERE item_name = ?";
+
+        Integer data = quantity;
+
+        try(Connection con = DriverManager.getConnection(url);
+            PreparedStatement statement = con.prepareStatement(sql))
+        {
+            statement.setString(1, productName);
+            ResultSet rs = statement.executeQuery();
+
+            while ( rs.next())
+            {
+                data = rs.getInt("quantity_avaiable") + quantity;
+            }
+
+            sql = "UPDATE ItemsTable SET quantity_avaiable = ? WHERE item_name = ?";
+            PreparedStatement statement1 = con.prepareStatement(sql);
+
+            statement1.setInt(1,data);
+            statement1.setString(2,productName);
+            statement1.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

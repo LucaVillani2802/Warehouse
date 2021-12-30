@@ -95,18 +95,25 @@ public class WindowController {
     @FXML
     protected ComboBox<String> itemRefillComboBox;
 
+    @FXML
+    protected Spinner<Integer> itemRefillSpinner;
+
+    @FXML
+    protected Button itemRefillButton;
+
     public void initialize(){
         // this configures the PAYMENT ChoiceBox
         paymentChoiceBox.getItems().setAll("Cash Payment","Electronic Payment");
         paymentChoiceBox.selectionModelProperty();
 
         // this item configures the ITEM ComboBox
-        configureComboBox();
+        configureComboBox(itemComboBox);
+        configureComboBox(itemRefillComboBox);
 
         // configure the spinner for the values 0 to 100, QUANTITY Spinner
         SpinnerValueFactory<Integer> quantityValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
         this.quantitySpinner.setValueFactory(quantityValueFactory);
-
+        this.itemRefillSpinner.setValueFactory(quantityValueFactory);
         this.itemQuantitySpinner.setValueFactory(quantityValueFactory);
 
         initTableView();
@@ -134,16 +141,25 @@ public class WindowController {
     public void on_saveitembutton_clicked() {
         EditableItem editableItem = new EditableItem(itemNameTextField.getText(), itemDescriptionTextArea.getText(), itemQuantitySpinner.getValue(), Double.parseDouble(itemPriceTextField.getText()));
         insertIntoItemTable(editableItem);
-        configureComboBox();
+        configureComboBox(itemComboBox);
+        configureComboBox(itemRefillComboBox);
         modifyItemView();
     }
 
-    public void configureComboBox(){
+    public void on_itemrefillbutton_clicked() {
+        Integer quantityToRefill = itemRefillSpinner.getValue();
+        String itemNameToRefill = itemRefillComboBox.getValue();
+
+        refillInItemsTable(itemNameToRefill, quantityToRefill);
+        modifyItemView();
+    }
+
+    public void configureComboBox(ComboBox itemCombo){
         ObservableList<String> arrayList = EditableItem.findnames();
-        itemComboBox.setItems(arrayList);
-        itemComboBox.setVisibleRowCount(3);
-        itemComboBox.setEditable(true);
-        itemComboBox.setPromptText("Choose the item");
+        itemCombo.setItems(arrayList);
+        itemCombo.setVisibleRowCount(4);
+        itemCombo.setEditable(true);
+        itemCombo.setPromptText("Choose the item");
 
     }
 

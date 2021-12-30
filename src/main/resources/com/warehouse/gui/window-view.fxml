@@ -118,21 +118,21 @@
                         <HBox prefHeight="40.0" prefWidth="600.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Item Name" />
-                              <ComboBox prefHeight="25.0" prefWidth="173.0" />
+                              <ComboBox fx:id="itemRefillComboBox" prefHeight="25.0" prefWidth="173.0" />
                            </children>
                         </HBox>
                         <Separator orientation="VERTICAL" prefHeight="50.0" />
                         <HBox prefHeight="40.0" prefWidth="600.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="25.0" prefWidth="147.0" text="Quantity to restock" />
-                              <Spinner prefHeight="25.0" prefWidth="87.0" />
+                              <Spinner fx:id="itemRefillSpinner" prefHeight="25.0" prefWidth="87.0" />
                            </children>
                         </HBox>
                         <Separator orientation="VERTICAL" prefHeight="270.0" />
                         <HBox prefHeight="80.0" prefWidth="600.0">
                            <children>
                               <Separator prefWidth="450.0" />
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Add quantity" />
+                              <Button fx:id="itemRefillButton" mnemonicParsing="false" onAction="#on_itemrefillbutton_clicked" prefHeight="40.0" prefWidth="100.0" text="Add quantity" />
                            </children>
                         </HBox>
                      </children>
