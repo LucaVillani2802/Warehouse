@@ -2,13 +2,10 @@ package com.warehouse.gui;
 
 import com.warehouse.database.DatabaseItem;
 import com.warehouse.items.EditableItem;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import static com.warehouse.database.DatabaseManager.*;
 
@@ -93,6 +90,11 @@ public class WindowController {
     @FXML
     protected TableColumn<EditableItem, String> priceItemTableColumnl;
 
+    //REFILL FORM
+
+    @FXML
+    protected ComboBox<String> itemRefillComboBox;
+
     public void initialize(){
         // this configures the PAYMENT ChoiceBox
         paymentChoiceBox.getItems().setAll("Cash Payment","Electronic Payment");
@@ -121,7 +123,7 @@ public class WindowController {
                 paymentChoiceBox.getValue()
         );
         //TODO creating controls where if the quantity_avaiable is less than the quantity ordered a dialog window is showed
-
+        clearOrderForm();
         insertIntoDB(databaseItem);
         orderListTable.setItems(showOrders());
         modifyQuantityItem(databaseItem);
@@ -130,7 +132,7 @@ public class WindowController {
     }
 
     public void on_saveitembutton_clicked() {
-        EditableItem editableItem = new EditableItem(itemNameTextField.getText(), itemDescriptionTextArea.toString(), itemQuantitySpinner.getValue(), Double.parseDouble(itemPriceTextField.getText()));
+        EditableItem editableItem = new EditableItem(itemNameTextField.getText(), itemDescriptionTextArea.getText(), itemQuantitySpinner.getValue(), Double.parseDouble(itemPriceTextField.getText()));
         insertIntoItemTable(editableItem);
         configureComboBox();
         modifyItemView();
@@ -169,6 +171,11 @@ public class WindowController {
 
     public void modifyItemView(){
         itemsTableList.setItems(showItems());
+    }
+
+    public void clearOrderForm(){
+        nameTextField.clear();
+        surnameTextField.clear();
     }
 
 }

@@ -12,4 +12,5 @@ module com.warehouse.warehouse {
     exports com.warehouse.gui;
     exports com.warehouse.database;
     opens com.warehouse.database to javafx.fxml;
+
 }

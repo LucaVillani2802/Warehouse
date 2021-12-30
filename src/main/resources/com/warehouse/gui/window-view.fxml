@@ -108,6 +108,38 @@
                </children></AnchorPane>
          </content>
        </Tab>
+         <Tab text=" Item Refill Form">
+             <content>
+                 <AnchorPane>
+               <children>
+                  <VBox prefHeight="500.0" prefWidth="600.0">
+                     <children>
+                        <Separator orientation="VERTICAL" prefHeight="50.0" />
+                        <HBox prefHeight="40.0" prefWidth="600.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Item Name" />
+                              <ComboBox prefHeight="25.0" prefWidth="173.0" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="50.0" />
+                        <HBox prefHeight="40.0" prefWidth="600.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="147.0" text="Quantity to restock" />
+                              <Spinner prefHeight="25.0" prefWidth="87.0" />
+                           </children>
+                        </HBox>
+                        <Separator orientation="VERTICAL" prefHeight="270.0" />
+                        <HBox prefHeight="80.0" prefWidth="600.0">
+                           <children>
+                              <Separator prefWidth="450.0" />
+                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Add quantity" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+             </content>
+         </Tab>
         <Tab text="Orders List">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
