@@ -129,12 +129,27 @@ public class WindowController {
                 (EditableItem.findPrice(itemComboBox.getValue()))* quantitySpinner.getValue(),
                 paymentChoiceBox.getValue()
         );
-        //TODO creating controls where if the quantity_avaiable is less than the quantity ordered a dialog window is showed
         clearOrderForm();
+
+        if (isAvaiable(databaseItem.getProductName(),databaseItem.getQuantity())){
         insertIntoDB(databaseItem);
         orderListTable.setItems(showOrders());
         modifyQuantityItem(databaseItem);
-        modifyItemView();
+        modifyItemView();}
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setHeaderText("Order Error");
+            alert.setContentText("Quantity not avaiable");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    alert.close();
+                }
+            });
+
+
+        }
+
 
     }
 

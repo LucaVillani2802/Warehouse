@@ -212,4 +212,29 @@ public class DatabaseManager {
         }
 
     }
+    public static boolean isAvaiable(String productName, Integer quantityToOrder){
+        String sql = "SELECT quantity_avaiable FROM ItemsTable WHERE item_name = ?";
+
+        Boolean isAvaiable = false;
+
+        try(Connection con = DriverManager.getConnection(url);
+            PreparedStatement statement = con.prepareStatement(sql))
+        {
+            statement.setString(1, productName);
+            ResultSet rs = statement.executeQuery();
+
+            while ( rs.next())
+            {
+                if ( rs.getInt("quantity_avaiable") >= quantityToOrder){
+                    isAvaiable = true;
+                }
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return isAvaiable;
+    }
 }
