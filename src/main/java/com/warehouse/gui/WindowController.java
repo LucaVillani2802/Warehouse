@@ -51,7 +51,7 @@ public class WindowController {
     protected TableView<DatabaseItem> orderListTable;
 
     @FXML
-    protected TableColumn idTableColumn;
+    protected TableColumn<DatabaseItem,String> idTableColumn;
 
     @FXML
     protected TableColumn<DatabaseItem, String> nameTableColumn;
@@ -65,10 +65,10 @@ public class WindowController {
     @FXML
     protected TableColumn<DatabaseItem, String> payment_methodTableColumn;
     @FXML
-    protected TableColumn<DatabaseItem, Double> priceTableColumn;
+    protected TableColumn<DatabaseItem, String> priceTableColumn;
 
     @FXML
-    protected TableColumn<DatabaseItem, Integer> quantityTableColumn;
+    protected TableColumn<DatabaseItem, String> quantityTableColumn;
 
 
     public void initialize(){
@@ -122,13 +122,13 @@ public class WindowController {
 
     public void initTableView()
     {
-        idTableColumn.setCellValueFactory(data -> new SimpleIntegerProperty());
+        idTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOrderId().toString()));
         nameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPersonName()));
         surnameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPersonSurname()));
         prdnameTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProductName()));
         payment_methodTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPaymentMethod()));
-        //priceTableColumn.setCellValueFactory(data -> data.getValue().getTotalCost());
-        //quantityTableColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getQuantity()));
+        priceTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTotalCost().toString()));
+        quantityTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getQuantity().toString()));
 
         orderListTable.setItems(showOrders());
     }
