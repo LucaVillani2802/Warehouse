@@ -144,6 +144,7 @@ public class WindowController {
         configureComboBox(itemComboBox);
         configureComboBox(itemRefillComboBox);
         modifyItemView();
+        clearItemsCreationForm();
     }
 
     public void on_itemrefillbutton_clicked() {
@@ -192,6 +193,12 @@ public class WindowController {
     public void clearOrderForm(){
         nameTextField.clear();
         surnameTextField.clear();
+    }
+
+    public void clearItemsCreationForm(){
+        itemNameTextField.clear();
+        itemDescriptionTextArea.clear();
+        itemPriceTextField.clear();
     }
 
 }
